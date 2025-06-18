@@ -6,12 +6,12 @@
   <project path="device/brcm/rpi4" name="raspberry-vanilla/android_device_brcm_rpi4" remote="github" revision="android-15.0.0_r4" >
     <linkfile src="mkimg.sh" dest="rpi4-mkimg.sh" />
   </project>
-  <project path="device/brcm/rpi5" name="raspberry-vanilla/android_device_brcm_rpi5" remote="github" revision="android-15.0.0_r4" >
+  <project path="device/brcm/rpi5" name="theproduct-space/android_device_brcm_rpi5" remote="github" revision=android-15.0.0_r4" >
     <linkfile src="mkimg.sh" dest="rpi5-mkimg.sh" />
   </project>
   <project path="device/brcm/rpi4-kernel" name="raspberry-vanilla/android_device_brcm_rpi4-kernel" remote="github" revision="android-15.0" />
-  <project path="device/brcm/rpi5-kernel" name="raspberry-vanilla/android_device_brcm_rpi5-kernel" remote="github" revision="android-15.0" />
-  <project path="vendor/brcm" name="raspberry-vanilla/proprietary_vendor_brcm" remote="github" revision="android-15.0" />
+  <project path="device/brcm/rpi5-kernel" name="raspberry-vanilla/android_device_brcm_rpi5-kernel" remote="github" revision="87dd4c8b188fd12e02b089692eb786f378ab3e6e" />
+  <project path="vendor/brcm" name="raspberry-vanilla/proprietary_vendor_brcm" remote="github" revision="ec660aa7ee24fe2ebc085d5568c6ae034dfd3b75" />
 
   <!-- Audio -->
   <project path="external/alsa-lib" name="raspberry-vanilla/android_external_alsa-lib" remote="github" revision="android-15.0" />
@@ -41,8 +41,8 @@
 
   <!-- FFmpeg -->
   <remove-project name="platform/external/libdav1d" />
-  <project path="external/ffmpeg" name="raspberry-vanilla/android_external_ffmpeg" remote="github" revision="android-15.0" />
-  <project path="external/ffmpeg_codec2" name="raspberry-vanilla/android_external_ffmpeg_codec2" remote="github" revision="android-15.0" />
+  <project path="external/ffmpeg" name="raspberry-vanilla/android_external_ffmpeg" remote="github" revision="android-15.0.0_r20" />
+  <project path="external/ffmpeg_codec2" name="raspberry-vanilla/android_external_ffmpeg_codec2" remote="github" revision="fb9c88880ff18d7fd8378076483b4d8fa76ea242" />
   <project path="external/libdav1d" name="raspberry-vanilla/android_external_libdav1d" remote="github" revision="android-15.0" />
   <project path="external/libudev-zero" name="raspberry-vanilla/android_external_libudev-zero" remote="github" revision="android-15.0" />
 
@@ -51,7 +51,7 @@
   <remove-project name="platform/external/libdrm" />
   <remove-project name="platform/external/mesa3d" />
   <remove-project name="platform/external/minigbm" />
-  <project path="external/drm_hwcomposer" name="raspberry-vanilla/android_external_drm_hwcomposer" remote="github" revision="android-15.0" />
+  <project path="external/drm_hwcomposer" name="raspberry-vanilla/android_external_drm_hwcomposer" remote="github" revision="5eac6bdec24dd0ac4d42a0d08d21e29fe539bfd9" />
   <project path="external/libdrm" name="raspberry-vanilla/android_external_libdrm" remote="github" revision="android-15.0.0_r4" />
   <project path="external/mesa3d" name="raspberry-vanilla/android_external_mesa3d" remote="github" revision="android-14.0" />
   <project path="external/minigbm" name="raspberry-vanilla/android_external_minigbm" remote="github" revision="android-15.0.0_r4" />
@@ -65,5 +65,41 @@
   <remove-project name="platform/packages/modules/Wifi" />
   <project path="external/wpa_supplicant_8" name="raspberry-vanilla/android_external_wpa_supplicant_8" remote="github" revision="android-15.0.0_r4" />
   <project path="packages/modules/Wifi" name="raspberry-vanilla/android_packages_modules_Wifi" remote="github" revision="android-15.0.0_r4" />
+
+  <!-- ======== NXP NFC INTEGRATION ======== -->
+  <!-- NFC Remote (add NXP NFC infrastructure remote) -->
+  <remote name="nxp-nfc-infra" fetch="https://github.com/nxp-nfc-infra/" />
+
+  <!-- Remove existing NFC project if present -->
+  <remove-project name="platform/hardware/nxp/nfc" />
+
+  <!-- NFC Core Components -->
+  <remove-project name="platform/packages/apps/Nfc" />
+  <project path="packages/apps/Nfc" name="nxp_nci_hal_nfc" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <remove-project name="platform/system/nfc" />
+  <project path="system/nfc" name="nxp_nci_hal_libnfc-nci" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- NFC HAL Implementation -->
+  <project path="hardware/nxp/nfc" name="nfcandroid_nfc_hidlimpl" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- NFC Frameworks -->
+  <project path="vendor/nxp/frameworks" name="nfcandroid_frameworks" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- EMVCo Support (for PN7220 only) -->
+  <project path="hardware/nxp/emvco" name="nfcandroid_emvco_aidlimpl" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- NFC Platform Reference - This contains vendor/nxp structure -->
+  <!-- Note: We'll copy files manually from platform_reference instead of using symlinks -->
+<project path="vendor/nxp/platform_reference" name="nfcandroid_platform_reference" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- NFC Test Applications (optional but recommended) -->
+  <project path="vendor/nxp/test_apps" name="nfcandroid_infra_test_apps" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- NFC Common Libraries (for TDA support) -->
+  <project path="vendor/nxp/comm_libs" name="nfcandroid_infra_comm_libs" remote="nxp-nfc-infra" revision="br_ar_15_comm_infra_dev" />
+
+  <!-- NFC Firmware (will be cloned separately) -->
+  <!-- Note: Firmware will be manually added from https://github.com/NXP/nfc-NXPNFCC_FW -->
 
 </manifest>
