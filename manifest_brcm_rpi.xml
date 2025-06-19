@@ -6,7 +6,7 @@
   <project path="device/brcm/rpi4" name="raspberry-vanilla/android_device_brcm_rpi4" remote="github" revision="android-15.0.0_r4" >
     <linkfile src="mkimg.sh" dest="rpi4-mkimg.sh" />
   </project>
-  <project path="device/brcm/rpi5" name="theproduct-space/android_device_brcm_rpi5" remote="github" revision=android-15.0.0_r4" >
+  <project path="device/brcm/rpi5" name="theproduct-space/android_device_brcm_rpi5" remote="github" revision="android-15.0.0_r4" >
     <linkfile src="mkimg.sh" dest="rpi5-mkimg.sh" />
   </project>
   <project path="device/brcm/rpi4-kernel" name="raspberry-vanilla/android_device_brcm_rpi4-kernel" remote="github" revision="android-15.0" />
